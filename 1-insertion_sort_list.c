@@ -22,17 +22,18 @@ void insertion_sort_list(listint_t **list)
 
 			if (current->next != NULL)
 				current->next->prev = current->prev;
-			current->prev->next = current->next;
+
 			current->next = current->prev;
 			current->prev = current->prev->prev;
 			current->next->prev = current;
 
-			if (current->prev == NULL)
+			if (current->prev != NULL)
+				current->prev->next = current;
+			else
 				*list = current;
 
 			print_list(*list);
 		}
-
 		current = temp;
 	}
 }
